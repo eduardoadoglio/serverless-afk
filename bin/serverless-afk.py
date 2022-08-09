@@ -1,4 +1,5 @@
 import os
+import sys
 import discord
 from dotenv import load_dotenv
 from datetime import datetime
@@ -15,15 +16,15 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    server = discord.utils.find(lambda s: s.name == SERVER, client.guilds)
-    print(SERVER)
-    print(CHANNEL_ID)
-    print(MY_ID)
     channel = client.get_channel(CHANNEL_ID)
     current_time = datetime.now()
-    await channel.send(
-        f"[{current_time.strftime('%d/%m/%Y %H:%M:%S')}] <@{MY_ID}> Terminei o deploy"
-    )
+    if "start" in sys.argv:
+        await channel.send("https://bit.ly/3JPmRKk")
+    elif "end" in sys.argv:
+        await channel.send(
+            f"[{current_time.strftime('%d/%m/%Y %H:%M:%S')}] <@{MY_ID}> Terminei o deploy"
+        )
+
     exit()
 
 
